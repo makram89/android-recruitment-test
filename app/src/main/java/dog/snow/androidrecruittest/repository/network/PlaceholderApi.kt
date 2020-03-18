@@ -29,10 +29,10 @@ interface PlaceholderApi{
     fun getPhotos(@Query("_limit") _limit : Int = 100) : Response<List<RawPhoto>>
 
     @GET("/albums/{id}")
-    fun getAlbums(@Path(value = "id") id: Int): Response <List<RawAlbum>>
+    fun getAlbums(@Path(value = "id") id: Int): Response <RawAlbum>
 
     @GET("/users/{id}")
-    fun getUsers(@Path(value = "id") id:Int ):Response<List<RawUser>>
+    fun getUsers(@Path(value = "id") id:Int ):Response<RawUser>
 
 }
 

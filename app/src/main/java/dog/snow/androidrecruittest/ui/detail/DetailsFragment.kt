@@ -1,4 +1,4 @@
-package dog.snow.androidrecruittest.ui
+package dog.snow.androidrecruittest.ui.detail
 
 import androidx.fragment.app.Fragment
 import dog.snow.androidrecruittest.R

@@ -9,7 +9,8 @@ data class PhotoWithDetails(
     val photoTitle : String,
     val albumTitle : String,
     val email : String,
-    val phoneNumber : String,
-    var url : String
+    val phone : String,
+    var url : String,
+    val thumbnailUrl: String
 
 ): Parcelable

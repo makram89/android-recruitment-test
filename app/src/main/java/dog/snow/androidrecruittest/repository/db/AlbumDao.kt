@@ -7,7 +7,7 @@ import androidx.room.Query
 import dog.snow.androidrecruittest.repository.model.Album
 
 @Dao
-interface AlbumsDao{
+interface AlbumDao{
 
     @Query("SELECT * FROM albums")
     suspend fun getAlbums() : List<Album>

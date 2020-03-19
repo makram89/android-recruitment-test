@@ -21,7 +21,11 @@ interface PhotoDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPhotos(photos: List<Photo>) : Long
 
-    @Query("SELECT photos.id, photos.title,  FROM photos")
+    @Query("SELECT photos.id AS photoId, photos.title AS photoTitle," +
+            " albums.title AS albumTitle, users.email AS email, users.phone, " +
+            "photos.url AS url, photos.thumbnailUrl AS thumbnailUrl " +
+            "FROM photos INNER JOIN albums ON photos.albumId=albums.id INNER JOIN users ON albums.userId = users.id" +
+            "WHERE photos.id = :id")
     suspend fun getDetailPhoto(id : Int): Photo
 
 }

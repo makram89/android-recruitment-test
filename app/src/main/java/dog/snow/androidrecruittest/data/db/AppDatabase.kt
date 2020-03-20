@@ -1,14 +1,12 @@
-package dog.snow.androidrecruittest.repository
+package dog.snow.androidrecruittest.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import dog.snow.androidrecruittest.repository.model.Album
-import dog.snow.androidrecruittest.repository.model.Photo
-import dog.snow.androidrecruittest.repository.model.User
-import dog.snow.androidrecruittest.repository.db.*
-
+import dog.snow.androidrecruittest.data.model.Album
+import dog.snow.androidrecruittest.data.model.Photo
+import dog.snow.androidrecruittest.data.model.User
 
 
 @Database(
@@ -29,9 +27,12 @@ abstract class AppDatabase : RoomDatabase() {
         private var instance: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
-            return instance ?: synchronized(this) {
+            return instance
+                ?: synchronized(this) {
                 instance
-                    ?: buildDatabase(context).also { instance = it }
+                    ?: buildDatabase(
+                        context
+                    ).also { instance = it }
             }
         }
 

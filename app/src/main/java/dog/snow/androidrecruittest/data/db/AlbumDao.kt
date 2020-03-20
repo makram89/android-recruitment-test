@@ -1,10 +1,10 @@
-package dog.snow.androidrecruittest.repository.db
+package dog.snow.androidrecruittest.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import dog.snow.androidrecruittest.repository.model.Album
+import dog.snow.androidrecruittest.data.model.Album
 
 @Dao
 interface AlbumDao{

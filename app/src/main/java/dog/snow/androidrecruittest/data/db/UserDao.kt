@@ -1,10 +1,10 @@
-package dog.snow.androidrecruittest.repository.db
+package dog.snow.androidrecruittest.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import dog.snow.androidrecruittest.repository.model.User
+import dog.snow.androidrecruittest.data.model.User
 
 @Dao
 interface UserDao{
@@ -19,6 +19,6 @@ interface UserDao{
     suspend fun insertOrUpdate(user: User): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUsers(users: List<User>): Long
+    suspend fun insertUsers(users: List<User>)
 
 }

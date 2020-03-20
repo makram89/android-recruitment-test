@@ -1,7 +1,7 @@
-package dog.snow.androidrecruittest.repository.network
-import dog.snow.androidrecruittest.repository.model.Album
-import dog.snow.androidrecruittest.repository.model.Photo
-import dog.snow.androidrecruittest.repository.model.RawUser
+package dog.snow.androidrecruittest.data.network
+import dog.snow.androidrecruittest.data.model.Album
+import dog.snow.androidrecruittest.data.model.Photo
+import dog.snow.androidrecruittest.data.model.RawUser
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit

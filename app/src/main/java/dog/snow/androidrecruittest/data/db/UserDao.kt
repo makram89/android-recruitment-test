@@ -10,15 +10,11 @@ import dog.snow.androidrecruittest.data.model.User
 interface UserDao{
 
     @Query("SELECT * FROM users")
-    suspend fun getUsers():List<User>
+    fun getUsers():List<User>
 
     @Query("SELECT * FROM users WHERE id= :id")
-    suspend fun getUserById(id : Int) : User
+    fun getUserById(id : Int) : User
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrUpdate(user: User): Long
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUsers(users: List<User>)
-
+    fun insertOrUpdate(user: User): Long
 }

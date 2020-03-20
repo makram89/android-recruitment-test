@@ -10,11 +10,11 @@ import dog.snow.androidrecruittest.data.model.Album
 interface AlbumDao{
 
     @Query("SELECT * FROM albums")
-    suspend fun getAlbums() : List<Album>
+    fun getAlbums() : List<Album>
 
     @Query("SELECT * FROM albums WHERE id=:id")
-    suspend fun getAlbumById(id: Int) : Album
+    fun getAlbumById(id: Int) : Album
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrUpdateAlbum(album: Album) : Long
+    fun insertOrUpdateAlbum(album: Album) : Long
 }

@@ -40,5 +40,8 @@ abstract class AppDatabase : RoomDatabase() {
             return Room.databaseBuilder(context, AppDatabase::class.java, "cool.db")
                 .build()
         }
+        private fun destroyDataBase(){
+            instance = null
+        }
     }
 }

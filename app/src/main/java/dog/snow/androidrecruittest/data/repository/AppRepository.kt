@@ -24,16 +24,16 @@ class AppRepository(val api: PlaceholderApi, var appDatabase: AppDatabase) : Saf
     //DAO
 
     fun getPhotosDao() = photoDao.getPhotosDao()
-    fun getPhotoDetail(id: Int) = photoDao.getDetailPhoto(id)
-    fun insertPhoto(photo: Photo) = photoDao.insertOrUpdatePhoto(photo)
+    fun getPhotoDetailDao(id: Int) = photoDao.getDetailPhoto(id)
+    fun insertPhotoDao(photo: Photo) = photoDao.insertOrUpdatePhoto(photo)
 
     fun getAlbumsDao() = albumDao.getAlbums()
-    fun getAlbumById(id: Int) = albumDao.getAlbumById(id)
-    fun insertAlbum(album: Album) = albumDao.insertOrUpdateAlbum(album)
+    fun getAlbumByIdDao(id: Int) = albumDao.getAlbumById(id)
+    fun insertAlbumDao(album: Album) = albumDao.insertOrUpdateAlbum(album)
 
     fun getUsersDao() = userDao.getUsers()
-    fun getUserById(id: Int) = userDao.getUserById(id)
-    fun insertUser(user: User) = userDao.insertOrUpdate(user)
+    fun getUserByIdDao(id: Int) = userDao.getUserById(id)
+    fun insertUserDao(user: User) = userDao.insertOrUpdate(user)
 
 
 

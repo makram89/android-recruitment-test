@@ -1,8 +1,6 @@
 package dog.snow.androidrecruittest.data.network
-import dog.snow.androidrecruittest.data.model.Album
-import dog.snow.androidrecruittest.data.model.Photo
-import dog.snow.androidrecruittest.data.model.RawUser
-import dog.snow.androidrecruittest.data.model.User
+
+import dog.snow.androidrecruittest.data.model.*
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -15,16 +13,18 @@ interface PlaceholderApi{
         operator fun invoke(): PlaceholderApi{
             val okClient = OkHttpClient.Builder()
                 .addInterceptor(UserAgentInterceptor)
+                .build()
 
             return Retrofit.Builder()
-                .client(okClient.build())
+                .client(okClient)
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl("https://jsonplaceholder.typicode.com")
                 .build()
                 .create(PlaceholderApi::class.java)
 
         }
     }
+
     @GET("/photos")
     suspend fun getPhotos(@Query("_limit") _limit : Int = 100) : Response<List<Photo>>
 

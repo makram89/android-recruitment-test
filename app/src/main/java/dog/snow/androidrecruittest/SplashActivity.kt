@@ -29,7 +29,7 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
 
         Log.d("MSG", "Splash")
         appDatabase = AppDatabase.getInstance(this)
-        val api = PlaceholderApi()
+        val api = PlaceholderApi(this.resources.getString(R.string.base_url))
         repository = AppRepository(api, appDatabase)
         cacheData()
     }
@@ -49,6 +49,7 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
     private fun startMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun cacheData() {
@@ -97,6 +98,7 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
                         },
                         {
                             progressbar.hide()
+                            startMain()
                         }
                     )
                 }
@@ -110,9 +112,6 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
 
         } catch (e: NetworkErrorException) {
             showError("Cannot connect to the Internet")
-        }
-        finally {
-
         }
 
 

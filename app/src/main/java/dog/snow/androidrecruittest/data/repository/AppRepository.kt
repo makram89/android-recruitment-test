@@ -13,6 +13,7 @@ class AppRepository(val api: PlaceholderApi, var appDatabase: AppDatabase) : Saf
 
     //geting data from jsonplaceholder
     suspend fun getPhotos() = apiRequest { api.getPhotos() }
+
     suspend fun getAlbum(id: Int) = apiRequest { api.getAlbum(id) }
     suspend fun getUser(id: Int) = apiRequest { api.getUser(id) }
 
@@ -26,6 +27,7 @@ class AppRepository(val api: PlaceholderApi, var appDatabase: AppDatabase) : Saf
     fun getPhotosDao() = photoDao.getPhotosDao()
     fun getPhotoDetailDao(id: Int) = photoDao.getDetailPhoto(id)
     fun insertPhotoDao(photo: Photo) = photoDao.insertOrUpdatePhoto(photo)
+    fun getListPhotos() = photoDao.getListPhotos()
 
     fun getAlbumsDao() = albumDao.getAlbums()
     fun getAlbumByIdDao(id: Int) = albumDao.getAlbumById(id)
@@ -34,7 +36,6 @@ class AppRepository(val api: PlaceholderApi, var appDatabase: AppDatabase) : Saf
     fun getUsersDao() = userDao.getUsers()
     fun getUserByIdDao(id: Int) = userDao.getUserById(id)
     fun insertUserDao(user: User) = userDao.insertOrUpdate(user)
-
 
 
 }

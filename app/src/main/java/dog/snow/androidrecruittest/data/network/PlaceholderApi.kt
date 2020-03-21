@@ -1,5 +1,6 @@
 package dog.snow.androidrecruittest.data.network
 
+import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.data.model.*
 import okhttp3.OkHttpClient
 import retrofit2.Response
@@ -10,7 +11,7 @@ import retrofit2.http.*
 interface PlaceholderApi{
 
     companion object{
-        operator fun invoke(): PlaceholderApi{
+        operator fun invoke(url:String): PlaceholderApi{
             val okClient = OkHttpClient.Builder()
                 .addInterceptor(UserAgentInterceptor)
                 .build()
@@ -18,7 +19,7 @@ interface PlaceholderApi{
             return Retrofit.Builder()
                 .client(okClient)
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://jsonplaceholder.typicode.com")
+                .baseUrl(url)
                 .build()
                 .create(PlaceholderApi::class.java)
 

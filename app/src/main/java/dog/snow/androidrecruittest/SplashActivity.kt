@@ -33,6 +33,11 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
         appDatabase = AppDatabase.getInstance(this)
         val api = PlaceholderApi(this.resources.getString(R.string.base_url))
         repository = AppRepository(api, appDatabase)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
         cacheData()
     }
 
@@ -55,6 +60,7 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
     }
 
     private fun cacheData() {
+//        TODO: Timeout errors handle!!!!!!!!!!!!!!
         progressbar.visibility = View.VISIBLE
         var networkUtils = NetworkUtils()
         try {
@@ -64,10 +70,10 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
                     Coroutines.ioThenMain(
                         {
                             val photos = repository.getPhotos()
-                            var albums: ArrayList<Album> = arrayListOf()
-                            var users: ArrayList<User> = arrayListOf()
-                            var albumsIndexes = arrayListOf<Int>()
-                            var usersIndexes = arrayListOf<Int>()
+                            val albums: ArrayList<Album> = arrayListOf()
+                            val users: ArrayList<User> = arrayListOf()
+                            val albumsIndexes = arrayListOf<Int>()
+                            val usersIndexes = arrayListOf<Int>()
 
                             for (photo in photos) {
                                 repository.insertPhotoDao(photo)

@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import dog.snow.androidrecruittest.MainActivity
 import dog.snow.androidrecruittest.R
 import dog.snow.androidrecruittest.data.db.AppDatabase
 import dog.snow.androidrecruittest.data.network.PlaceholderApi
@@ -71,7 +73,11 @@ class ListFragment : Fragment(), PhotosListener {
     }
 
     override fun onClick(view: View, item: ListItem) {
-        Log.d("LISTENER", "Item Clicked")
+
+//        item....
+
+
+        (context as MainActivity).openDetailFragment(this, item.id )
     }
 
     override fun onSearch(members: Int) {

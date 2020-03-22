@@ -34,10 +34,4 @@ class ListViewModel(
         )
     }
 
-
-    fun getPhotos(): LiveData<List<ListItem>> {
-        fetchPhotos()
-        return photosMutable
-    }
-
 }

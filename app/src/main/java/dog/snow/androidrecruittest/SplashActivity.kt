@@ -47,7 +47,7 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
             .setMessage(getString(R.string.cant_download_dialog_message, errorMessage))
             .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ -> cacheData() }
             .setNegativeButton(R.string.cant_download_dialog_btn_negative) { _, _ -> finish() }
-            .setNeutralButton("Go Offline"){_,_ ->startMain()}
+            .setNeutralButton("Go Offline") { _, _ -> startMain() }
             .create()
             .apply { setCanceledOnTouchOutside(false) }
             .show()
@@ -98,15 +98,15 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
                         }
 
                     }
-                    launch (Main){  startMain()}
+                    launch(Main) { startMain() }
 
 
                 } catch (e: NetworkErrorException) {
-                    launch (Main){  showError("Cannot connect to the Internet")}
+                    launch(Main) { showError("Cannot connect to the Internet") }
                 } catch (e: TimeoutCancellationException) {
-                    launch (Main){ showError(NoConnectionException().message)}
+                    launch(Main) { showError(NoConnectionException().message) }
                 } catch (e: Exception) {
-                    launch (Main){showError(e.message)}
+                    launch(Main) { showError(e.message) }
                 }
 
             }

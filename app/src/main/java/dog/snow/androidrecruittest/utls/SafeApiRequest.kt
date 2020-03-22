@@ -7,7 +7,6 @@ import java.io.IOException
 
 abstract class SafeApiRequest {
     suspend fun <T : Any> apiRequest(call: suspend () -> Response<T>): T {
-//        todo add reapeat
         val response = call.invoke()
         if (response.isSuccessful && response.body() != null) {
             return response.body()!!

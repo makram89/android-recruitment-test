@@ -79,7 +79,8 @@ class ListFragment : Fragment(), PhotosListener {
         val fragmentDetail = DetailsFragment()
         bundle.putInt("EXTRA_PHOTO_ID", item.id)
         fragmentDetail.arguments = bundle
-        val fragmentTransaction = (context as MainActivity).supportFragmentManager.beginTransaction()
+        val fragmentTransaction =
+            (context as MainActivity).supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(id, fragmentDetail)
             .addToBackStack("app")
             .commit()

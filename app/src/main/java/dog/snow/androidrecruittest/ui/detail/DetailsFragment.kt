@@ -18,7 +18,7 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class DetailsFragment() : Fragment() {
+class DetailsFragment : Fragment() {
     private var EXTRA_PHOTO_ID = 0
     private lateinit var viewModel: DetailViewModel
     private lateinit var appDatabase: AppDatabase
@@ -39,7 +39,6 @@ class DetailsFragment() : Fragment() {
                 DetailViemModelFactory(repository)
             ).get(DetailViewModel::class.java)
 
-//        viewModel.fetchDetail(detailId)
         return inflater.inflate(R.layout.details_fragment, container, false)
     }
 

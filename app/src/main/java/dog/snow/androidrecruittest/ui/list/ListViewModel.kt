@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel
 import dog.snow.androidrecruittest.data.repository.AppRepository
 import dog.snow.androidrecruittest.ui.model.ListItem
 import dog.snow.androidrecruittest.utls.Coroutines
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class ListViewModel(
@@ -16,7 +18,9 @@ class ListViewModel(
 
     private lateinit var job: Job
 
-    val photosMutable = MutableLiveData<ArrayList<ListItem>>()
+    private var photosMutable = MutableLiveData<List<ListItem>>()
+    val livePhotos : LiveData<List<ListItem>>
+        get() = photosMutable
 
 
     fun fetchPhotos() = runBlocking {
@@ -26,14 +30,14 @@ class ListViewModel(
             },
             {
                 photosMutable.value = it as ArrayList<ListItem>
-
             }
         )
     }
 
-    fun getPhotos(): LiveData<ArrayList<ListItem>> {
+
+    fun getPhotos(): LiveData<List<ListItem>> {
         fetchPhotos()
-        Log.d("did he?", photosMutable.value?.size.toString())
         return photosMutable
     }
+
 }

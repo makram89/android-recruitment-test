@@ -19,6 +19,8 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import okio.Timeout
+import java.net.SocketTimeoutException
 
 class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
 
@@ -58,9 +60,7 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
         try {
             if (networkUtils.isOnline(this)) {
                 Log.d("NETWORK", "CONNECTED")
-
-
-                var job = runBlocking {
+                val job = runBlocking {
                     Coroutines.ioThenMain(
                         {
                             val photos = repository.getPhotos()
@@ -91,10 +91,6 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
                             for (user in users) {
                                 repository.insertUserDao(user)
                             }
-                            Log.d("USERS", users.size.toString())
-                            Log.d("ALBUMS", albums.size.toString())
-                            Log.d("ALBUMS", repository.getUserByIdDao(1).toString())
-
                         },
                         {
                             progressbar.hide()
@@ -102,16 +98,20 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
                         }
                     )
                 }
-
-
             } else {
                 Log.d("NETWORK", "woops!")
                 throw NetworkErrorException()
             }
-
-
         } catch (e: NetworkErrorException) {
             showError("Cannot connect to the Internet")
+        }
+        catch (e: SocketTimeoutException)
+        {
+            showError("Problem with connection")
+        }
+        catch (e: Throwable)
+        {
+            showError(e.message)
         }
 
 

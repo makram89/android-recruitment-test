@@ -13,12 +13,12 @@ import dog.snow.androidrecruittest.data.model.User
 import dog.snow.androidrecruittest.data.network.PlaceholderApi
 import dog.snow.androidrecruittest.data.repository.AppRepository
 import dog.snow.androidrecruittest.utls.Coroutines
+import dog.snow.androidrecruittest.utls.NetworkDisabledException
 import dog.snow.androidrecruittest.utls.NetworkUtils
+import dog.snow.androidrecruittest.utls.NoConnectionException
 import kotlinx.android.synthetic.main.layout_progressbar.*
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import okio.Timeout
 import java.net.SocketTimeoutException
 
@@ -54,73 +54,64 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
     }
 
     private fun startMain() {
+        progressbar.hide()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
     private fun cacheData() {
-//        TODO: Timeout errors handle!!!!!!!!!!!!!!
         progressbar.visibility = View.VISIBLE
-        var networkUtils = NetworkUtils()
-        try {
-            if (networkUtils.isOnline(this)) {
-                Log.d("NETWORK", "CONNECTED")
-                val job = runBlocking {
-                    Coroutines.ioThenMain(
-                        {
-                            val photos = repository.getPhotos()
-                            val albums: ArrayList<Album> = arrayListOf()
-                            val users: ArrayList<User> = arrayListOf()
-                            val albumsIndexes = arrayListOf<Int>()
-                            val usersIndexes = arrayListOf<Int>()
+        val networkUtils = NetworkUtils()
 
-                            for (photo in photos) {
-                                repository.insertPhotoDao(photo)
-                                if (albumsIndexes.contains(photo.albumId)) {
-                                    continue
-                                } else {
-                                    albumsIndexes.add(photo.albumId)
-                                    albums.add(repository.getAlbum(photo.albumId))
-                                }
+        if (networkUtils.isOnline(this)) {
+            GlobalScope.launch {
+                try {
+                    withTimeout(2000L) {
+                        val photos = repository.getPhotos()
+                        val albums: ArrayList<Album> = arrayListOf()
+                        val users: ArrayList<User> = arrayListOf()
+                        val albumsIndexes = arrayListOf<Int>()
+                        val usersIndexes = arrayListOf<Int>()
 
+                        for (photo in photos) {
+                            repository.insertPhotoDao(photo)
+                            if (albumsIndexes.contains(photo.albumId)) {
+                                continue
+                            } else {
+                                albumsIndexes.add(photo.albumId)
+                                albums.add(repository.getAlbum(photo.albumId))
                             }
-                            for (album in albums) {
-                                repository.insertAlbumDao(album)
-                                if (usersIndexes.contains(album.userId)) {
-                                    continue
-                                } else {
-                                    usersIndexes.add(album.userId)
-                                    users.add(repository.getUser(album.userId))
-                                }
-                            }
-                            for (user in users) {
-                                repository.insertUserDao(user)
-                            }
-                        },
-                        {
-                            progressbar.hide()
-                            startMain()
+
                         }
-                    )
+                        for (album in albums) {
+                            repository.insertAlbumDao(album)
+                            if (usersIndexes.contains(album.userId)) {
+                                continue
+                            } else {
+                                usersIndexes.add(album.userId)
+                                users.add(repository.getUser(album.userId))
+                            }
+                        }
+                        for (user in users) {
+                            repository.insertUserDao(user)
+                        }
+
+                    }
+                    launch (Main){  startMain()}
+
+
+                } catch (e: NetworkErrorException) {
+                    launch (Main){  showError("Cannot connect to the Internet")}
+                } catch (e: TimeoutCancellationException) {
+                    launch (Main){ showError(NoConnectionException().message)}
+                } catch (e: Exception) {
+                    launch (Main){showError(e.message)}
                 }
-            } else {
-                Log.d("NETWORK", "woops!")
-                throw NetworkErrorException()
+
             }
-        } catch (e: NetworkErrorException) {
-            showError("Cannot connect to the Internet")
+        } else {
+            showError(NetworkDisabledException().message)
         }
-        catch (e: SocketTimeoutException)
-        {
-            showError("Problem with connection")
-        }
-        catch (e: Throwable)
-        {
-            showError(e.message)
-        }
-
-
     }
-
 }

@@ -18,8 +18,8 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class DetailsFragment(val detailId: Int) : Fragment() {
-
+class DetailsFragment() : Fragment() {
+    private var EXTRA_PHOTO_ID = 0
     private lateinit var viewModel: DetailViewModel
     private lateinit var appDatabase: AppDatabase
     private lateinit var repository: AppRepository
@@ -29,7 +29,7 @@ class DetailsFragment(val detailId: Int) : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        EXTRA_PHOTO_ID = arguments?.get("EXTRA_PHOTO_ID") as Int
         val api = PlaceholderApi(this.resources.getString(R.string.base_url))
         appDatabase = AppDatabase.getInstance(inflater.context)
         repository = AppRepository(api, appDatabase)
@@ -47,7 +47,7 @@ class DetailsFragment(val detailId: Int) : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         GlobalScope.launch {
-            val detail = viewModel.getDetail(detailId)
+            val detail = viewModel.getDetail(EXTRA_PHOTO_ID)
             launch(Main) {
                 tv_photo_title.text = detail.photoTitle
                 tv_album_title.text = detail.albumTitle
@@ -59,12 +59,10 @@ class DetailsFragment(val detailId: Int) : Fragment() {
                     .error(R.drawable.ic_logo_sd_symbol)
                     .into(iv_photo)
             }
+
         }
 
-
     }
-
-
 
 
 }

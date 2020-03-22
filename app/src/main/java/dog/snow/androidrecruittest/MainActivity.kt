@@ -16,9 +16,4 @@ class MainActivity : AppCompatActivity(R.layout.main_activity) {
     }
 
 
-    fun openDetailFragment(fragment: Fragment, detailId: Int) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(fragment.id, DetailsFragment(detailId)).addToBackStack("app")
-            .commit()
-    }
 }

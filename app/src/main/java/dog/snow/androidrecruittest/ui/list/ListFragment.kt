@@ -1,5 +1,6 @@
 package dog.snow.androidrecruittest.ui.list
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import dog.snow.androidrecruittest.data.db.AppDatabase
 import dog.snow.androidrecruittest.data.network.PlaceholderApi
 import dog.snow.androidrecruittest.data.repository.AppRepository
 import dog.snow.androidrecruittest.ui.adapter.PhotoListAdapter
+import dog.snow.androidrecruittest.ui.detail.DetailsFragment
 import dog.snow.androidrecruittest.ui.model.ListItem
 import kotlinx.android.synthetic.main.layout_search.*
 import kotlinx.android.synthetic.main.list_fragment.*
@@ -73,11 +75,16 @@ class ListFragment : Fragment(), PhotosListener {
     }
 
     override fun onClick(view: View, item: ListItem) {
+        val bundle = Bundle()
+        val fragmentDetail = DetailsFragment()
+        bundle.putInt("EXTRA_PHOTO_ID", item.id)
+        fragmentDetail.arguments = bundle
+        val fragmentTransaction = (context as MainActivity).supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(id, fragmentDetail)
+            .addToBackStack("app")
+            .commit()
 
-//        item....
 
-
-        (context as MainActivity).openDetailFragment(this, item.id )
     }
 
     override fun onSearch(members: Int) {

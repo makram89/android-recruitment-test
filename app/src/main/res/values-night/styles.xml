@@ -6,10 +6,7 @@
     </style>
 
     <style name="ToolBarStyle">
-        <item name="android:background">@color/sd_color_black</item>
         <item name="titleMarginStart">@dimen/margin_large</item>
-        <item name="tickMarkTintMode">src_in</item>
-
     </style>
 
 

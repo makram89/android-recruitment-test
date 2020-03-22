@@ -16,7 +16,6 @@
     <style name="ToolBarStyle">
         <item name="titleMarginStart">@dimen/margin_large</item>
 
-
     </style>
 
     

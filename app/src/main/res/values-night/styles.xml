@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.AppTheme.AppBar" parent="@style/Widget.Design.AppBarLayout">
+
+    </style>
+
+    <style name="ToolBarStyle">
+        <item name="android:background">@color/sd_color_black</item>
+        <item name="titleMarginStart">@dimen/margin_large</item>
+        <item name="tickMarkTintMode">src_in</item>
+
+    </style>
+
+
+</resources>

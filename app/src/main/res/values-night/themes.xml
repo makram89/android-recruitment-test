@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base.AppTheme" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+    </style>
+
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="android:colorPrimary">@color/color_primary</item>
+        <item name="android:colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="android:colorAccent">@color/color_accent</item>
+        <item name="android:background">@color/color_background</item>
+
+    </style>
+
+    <style name="AppTheme.SplashTheme">
+        <item name="android:colorPrimary">@color/color_primary</item>
+        <item name="android:colorPrimaryDark">@color/color_primary</item>
+        <item name="android:colorAccent">@color/color_accent</item>
+
+    </style>
+
+
+</resources>

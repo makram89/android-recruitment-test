@@ -1,23 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<style name="Widget.AppTheme.AppBar" parent="@style/Widget.Design.AppBarLayout">
-
-</style>
-
-<style name="Widget.AppTheme.Banner" parent="@style/Widget.MaterialComponents.TextView">
-    <item name="android:paddingBottom">4dp</item>
-</style>
-    
-<style name="ProgressbarStyle">
-    <item name="android:indeterminate">true</item>
-   <item name="android:indeterminateTint">@color/color_accent</item>
-</style>
-    <style name="ToolBarStyle">
-        <item name="titleMarginStart">@dimen/margin_large</item>
+    <style name="Widget.AppTheme.AppBar" parent="@style/Widget.Design.AppBarLayout">
 
     </style>
 
-    
+    <style name="Widget.AppTheme.Banner" parent="@style/Widget.MaterialComponents.TextView">
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="ProgressbarStyle">
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateTint">@color/color_accent</item>
+    </style>
+
+    <style name="ToolBarStyle">
+        <item name="titleMarginStart">@dimen/margin_large</item>
+
+
+    </style>
+
+    <style name="ListRV">
+        <item name="android:background">@color/color_window_background</item>
+
+    </style>
+    <style name="ListItem">
+        <item name="android:background">@color/color_window_background</item>
+
+    </style>
+
+
 
 </resources>

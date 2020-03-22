@@ -10,13 +10,14 @@
         <item name="android:colorAccent">@color/color_accent</item>
         <item name="android:background">@color/color_background</item>
 
+
     </style>
 
     <style name="AppTheme.SplashTheme">
         <item name="android:colorPrimary">@color/color_primary</item>
         <item name="android:colorPrimaryDark">@color/color_primary</item>
         <item name="android:colorAccent">@color/color_accent</item>
-
+        <item name="android:background">@color/color_background</item>
     </style>
 
 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
-    android:padding="@dimen/margin_normal">
+    android:padding="@dimen/margin_normal"
+    >
 
     <ImageView
         android:id="@+id/iv_thumb"
@@ -25,7 +26,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toEndOf="@+id/iv_thumb"
         app:layout_constraintTop_toTopOf="@+id/iv_thumb"
-        tools:text="Name" />
+        tools:text="Name"
+        style="@style/ListItem"/>
 
     <TextView
         android:id="@+id/tv_album_title"
@@ -35,5 +37,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintStart_toStartOf="@+id/tv_photo_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_photo_title"
-        tools:text="Description" />
+        tools:text="Description"
+        style="@style/ListItem"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

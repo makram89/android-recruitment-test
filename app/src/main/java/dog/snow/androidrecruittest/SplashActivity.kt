@@ -29,7 +29,6 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("MSG", "Splash")
         appDatabase = AppDatabase.getInstance(this)
         val api = PlaceholderApi(this.resources.getString(R.string.base_url))
         repository = AppRepository(api, appDatabase)
@@ -48,6 +47,7 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
             .setMessage(getString(R.string.cant_download_dialog_message, errorMessage))
             .setPositiveButton(R.string.cant_download_dialog_btn_positive) { _, _ -> cacheData() }
             .setNegativeButton(R.string.cant_download_dialog_btn_negative) { _, _ -> finish() }
+            .setNeutralButton("Go Offline"){_,_ ->startMain()}
             .create()
             .apply { setCanceledOnTouchOutside(false) }
             .show()
@@ -67,7 +67,7 @@ class SplashActivity : AppCompatActivity(R.layout.splash_activity) {
         if (networkUtils.isOnline(this)) {
             GlobalScope.launch {
                 try {
-                    withTimeout(2000L) {
+                    withTimeout(5000L) {
                         val photos = repository.getPhotos()
                         val albums: ArrayList<Album> = arrayListOf()
                         val users: ArrayList<User> = arrayListOf()

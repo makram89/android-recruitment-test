@@ -56,7 +56,7 @@ class DetailsFragment() : Fragment() {
                 tv_phone.text = detail.phone
                 Picasso.get()
                     .load(detail.url)
-                    .error(R.drawable.ic_logo_sd_symbol)
+                    .error(R.drawable.ic_placeholder )
                     .into(iv_photo)
             }
 

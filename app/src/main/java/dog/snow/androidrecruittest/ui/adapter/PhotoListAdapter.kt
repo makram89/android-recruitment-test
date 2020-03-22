@@ -54,7 +54,7 @@ class PhotoListAdapter(var photosDataset: List<ListItem>, private val listener: 
 
             Picasso.get()
                 .load(item.thumbnailUrl)
-                .error(R.drawable.ic_logo_sd_symbol)
+                .error(R.drawable.ic_placeholder)
                 .into(ivThumb)
 
             itemView.setOnClickListener { listener.onClick(itemView, item) }

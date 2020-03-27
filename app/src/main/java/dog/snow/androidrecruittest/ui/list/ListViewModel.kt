@@ -23,8 +23,8 @@ class ListViewModel(
         get() = photosMutable
 
 
-    fun fetchPhotos() = runBlocking {
-        job = Coroutines.ioThenMain(
+    fun fetchPhotos() {
+        Coroutines.ioThenMain(
             {
                 repository.getListPhotos()
             },
